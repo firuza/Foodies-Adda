@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_view_recipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.firuza.foodiesadda.ViewRecipe">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:text="Bhaji Dano"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtTitle"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textColorLink="?attr/actionModeSplitBackground"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:text="Ingridients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/txtIng"
+                android:paddingTop="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:text="  Green Peas (0.5 kg)  \n  Coriander leaves (250 gms)  \n  Palak (500 gms)  \n  Onion (1)  \n  Edible Oil (2 table spoons - Use olive oil for best results)  \n  Ginger garlic paste (1.5 table spoon)  \n  Salt (0.5 tea spoon)  \n  Turmeric powder (1 tea spoon)  \n  Dhana Jeera powder (3 tea spoons)  \n  Dhansak masala (2 tea spoons)  \n  Chilli powder (1 tea spoon - only if you want it spicy)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:id="@+id/txtIngridients"
+                android:textSize="15sp" />
+
+            <TextView
+                android:text="Recipe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:textStyle="bold"
+                android:id="@+id/txtRecipeTitle"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary" />
+
+
+            <TextView
+                android:text="Preparation Time"
+                android:paddingTop="6dp"
+                android:layout_width="120dp"
+                android:textSize="15sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtPrep" />
+
+            <TextView
+                android:text="1 Hour"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:id="@+id/txtPreparationTime" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\n - Cut Palak and coriander leaves in one vessel. - Boil green peas in another vessel for half hour.  \n   \n In another pan do the following:  \n - Chop onions finely.   \n - Saute in pan till light brown.  \n - Add ginger garlic paste, salt, chilli powder, dhana jeera, and dhansak masala.  \n - Add 50 ml water and simmer for 1 minute.  \n - Put the cut palak and coriander leaves (little by little) in the pan and stir well.  \n - Simmer it for 2 minutes.  \n - Add 100ml water and cook for 2 more minutes.  \n - Put the boiled green peas in the pan and add 100ml water.  \n - Cook untill very little gravy/water reamins. "
+                android:textSize="15sp"
+                android:paddingTop="6dp"
+                android:id="@+id/txtProcedure" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
