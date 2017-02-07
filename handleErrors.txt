@@ -1,0 +1,6 @@
+Running your android app on your mobile
+If you face error 'permission denied on device'
+sudo adb kill-server
+sudo adb start-server
+
+
