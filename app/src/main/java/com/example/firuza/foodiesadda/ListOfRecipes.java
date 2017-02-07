@@ -38,18 +38,30 @@ public class ListOfRecipes extends AppCompatActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
 
-                String valueProcedure;
+                String valueProcedure, valueTitle, valueTime;
                 String title=((TextView) view).getText().toString();
 
                 Cursor rs = mydb.getData(title);
                 rs.moveToFirst();
 
+                valueTitle = rs.getString(rs.getColumnIndex(DatabaseHandler.COLUMN_NAME));
+                valueTime = rs.getString(rs.getColumnIndex(DatabaseHandler.COLUMN_TIME));
                 valueProcedure = rs.getString(rs.getColumnIndex(DatabaseHandler.COLUMN_PROCEDURE));
-                Intent intent1 = new Intent(getApplicationContext(), ViewRecipe.class);
 
-                intent1.putExtra("myextra",(CharSequence)valueProcedure);
+                Intent intent1 = new Intent(getApplicationContext(), ViewRecipe.class);
+                Bundle extras = new Bundle();
+                extras.putString("RTitle", valueTitle.toString());
+                extras.putString("RTime", valueTime.toString());
+                extras.putString("RProcedure", valueProcedure.toString());
+//                intent1.putExtra("myextra",(CharSequence)valueProcedure);
+                intent1.putExtras(extras);
 
                 startActivity(intent1);
+
+
+           //     Intent intent = new Intent(this, MyActivity.class);
+//                extras.putString("EXTRA_USERNAME","my_username");
+  //              extras.putString("EXTRA_PASSWORD","my_password");
 
 
             }

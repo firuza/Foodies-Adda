@@ -24,7 +24,7 @@ import org.w3c.dom.Text;
 
 public class ViewRecipe extends AppCompatActivity  implements View.OnClickListener{
 
-    TextView txtProcedure;
+    TextView  txtProcedure, txtTitle, txtPreparationTime;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -32,11 +32,23 @@ public class ViewRecipe extends AppCompatActivity  implements View.OnClickListen
         setContentView(R.layout.activity_view_recipe);
 
         txtProcedure = (TextView)findViewById(R.id.txtProcedure);
+        txtTitle = (TextView)findViewById(R.id.txtTitle);
+        txtPreparationTime = (TextView)findViewById(R.id.txtPreparationTime);
 
-        Intent intent = getIntent();
+/*        Intent intent = getIntent();
         if (intent.hasExtra("myextra")){
             txtProcedure.setText(intent.getStringExtra("myextra")+"!");
-        }
+        }*/
+
+
+        Bundle extras = getIntent().getExtras();
+        String title = extras.getString("RTitle");
+        String time = extras.getString("RTime");
+        String procedure = extras.getString("RProcedure");
+
+        txtTitle.setText(title);
+        txtPreparationTime.setText(time);
+        txtProcedure.setText(procedure);
 
     }
     public void onClick(View view) {
