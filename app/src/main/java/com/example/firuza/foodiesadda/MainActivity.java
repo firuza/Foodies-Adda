@@ -15,7 +15,7 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
     DatabaseHandler mydb;
-    Button btnAddRecipe, btnViewRecipes;
+    Button btnAddRecipe, btnViewRecipes, button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

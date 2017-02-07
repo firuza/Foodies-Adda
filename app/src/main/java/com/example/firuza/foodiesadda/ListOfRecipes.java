@@ -53,16 +53,8 @@ public class ListOfRecipes extends AppCompatActivity implements View.OnClickList
                 extras.putString("RTitle", valueTitle.toString());
                 extras.putString("RTime", valueTime.toString());
                 extras.putString("RProcedure", valueProcedure.toString());
-//                intent1.putExtra("myextra",(CharSequence)valueProcedure);
                 intent1.putExtras(extras);
-
                 startActivity(intent1);
-
-
-           //     Intent intent = new Intent(this, MyActivity.class);
-//                extras.putString("EXTRA_USERNAME","my_username");
-  //              extras.putString("EXTRA_PASSWORD","my_password");
-
 
             }
         });

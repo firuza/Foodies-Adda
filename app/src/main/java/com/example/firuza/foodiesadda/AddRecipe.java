@@ -17,7 +17,7 @@ import android.app.AlertDialog;
 public class AddRecipe extends AppCompatActivity implements View.OnClickListener {
 
     DatabaseHandler mydb;
-    Button btnAddRecipe, btnClear;
+    Button btnAddRecipe, btnClear, btnAddIngridients;
     EditText editTextRTitle, editTextPrepTime, editTextProcedure;
     String insertRTitle, insertPrepTime, insertProcedure;
 
@@ -36,6 +36,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         btnAddRecipe = (Button) findViewById(R.id.btnAddRecipe);
         btnAddRecipe.setOnClickListener(this);
+
+        btnAddIngridients = (Button) findViewById(R.id.btnAddIngridients);
+        btnAddIngridients.setOnClickListener(this);
 
         btnClear = (Button) findViewById(R.id.btnClear);
         btnClear.setOnClickListener(this);
@@ -61,6 +64,11 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 editTextRTitle.setText("");
                 editTextPrepTime.setText("");
                 editTextProcedure.setText("");
+                break;
+
+            case R.id.btnAddIngridients:
+                Intent intent3 = new Intent(getApplicationContext(), AddIngridient.class);
+                startActivity(intent3);
                 break;
 /*
             case R.id.btnDeleteAll:

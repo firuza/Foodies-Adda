@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Foodies Adda</string>
+    <string name="title_activity_add_ingridients">AddIngridients</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

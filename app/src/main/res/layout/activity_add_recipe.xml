@@ -46,7 +46,7 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/editTextProcedure"
@@ -90,5 +90,14 @@
         android:layout_below="@+id/editTextRTitle"
         android:layout_alignStart="@+id/textViewTitle"
         android:layout_marginTop="28dp" />
+
+    <Button
+        android:text="Add Ingridients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddIngridients"
+        android:layout_alignTop="@+id/editTextProcedure"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="90dp" />
 
 </RelativeLayout>

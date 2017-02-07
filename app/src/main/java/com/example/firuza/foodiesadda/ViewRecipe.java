@@ -35,12 +35,6 @@ public class ViewRecipe extends AppCompatActivity  implements View.OnClickListen
         txtTitle = (TextView)findViewById(R.id.txtTitle);
         txtPreparationTime = (TextView)findViewById(R.id.txtPreparationTime);
 
-/*        Intent intent = getIntent();
-        if (intent.hasExtra("myextra")){
-            txtProcedure.setText(intent.getStringExtra("myextra")+"!");
-        }*/
-
-
         Bundle extras = getIntent().getExtras();
         String title = extras.getString("RTitle");
         String time = extras.getString("RTime");
