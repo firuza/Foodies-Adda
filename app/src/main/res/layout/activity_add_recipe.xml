@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/textViewTitle"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/editTextAddRecipe"
         android:layout_marginStart="11dp"
         android:layout_marginTop="22dp" />
 
@@ -96,8 +95,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnAddIngridients"
-        android:layout_alignTop="@+id/editTextProcedure"
+        android:layout_below="@+id/editTextProcedure"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="90dp" />
+        android:layout_marginTop="31dp" />
 
 </RelativeLayout>
