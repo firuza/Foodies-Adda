@@ -26,7 +26,6 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
     LinearLayout llayout;
     ArrayAdapter arrayAdapter;
     ScrollView scroll;
-    TextView textView;
     int layoutID=1001;
     int IngID=2001;
     int QtyID=3001;
@@ -40,12 +39,11 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ingridient);
 
-        textView = (TextView) findViewById(R.id.textView);
-
-        llayout = (LinearLayout) findViewById(R.id.linearlayout);
-
+        //Scrollable layout on the activity
         scroll = (ScrollView) findViewById(R.id.scroll);
 
+        //Main layout of scrollable layout
+        llayout = (LinearLayout) findViewById(R.id.linearlayout);
         mydb = new DatabaseHandler(this);
 
         ArrayList array_list = mydb.getListofRecipes();
@@ -53,30 +51,35 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         addIngQty();
     }
 
+    //Function to add auto complte text, edit text, and 2 buttons to the layout
     void addIngQty() {
+        //Create a linear layout ll to comprise of ingredients edittext, quantity edittext, add button, and remove button
         LinearLayout ll=new LinearLayout(this);
         ll.setOrientation(LinearLayout.HORIZONTAL);
         ll.setId(layoutID+i);
 
+        //Create a autocomplete text view and load all ingredients
         final AutoCompleteTextView acMasterIngridients = new AutoCompleteTextView(this);
         acMasterIngridients.setId(IngID+i);
         acMasterIngridients.setAdapter(arrayAdapter);
         acMasterIngridients.setWidth(400);
+        ll.addView(acMasterIngridients); //Adding to layout
 
-        ll.addView(acMasterIngridients);
-
+        //Create a quantity edit text
         final EditText txtQty = new EditText(this);
         txtQty.setId(QtyID+i);
         txtQty.setWidth(300);
-        ll.addView(txtQty);
+        ll.addView(txtQty); //Adding to layout
 
+        //Create a add button to dynamically create items in layout
         final Button btnAdd = new Button(this);
         btnAdd.setText("+");
         btnAdd.setId(btnAddID+i);
         btnAdd.setOnClickListener(this);
         ll.addView(btnAdd);
 
-        if(i!=0) {
+        //Create a remove buttons to dynamically remove items from layout.
+        if(i!=0) { //Atleast one set of item should be present in the layout
             final Button btnRemove = new Button(this);
             btnRemove.setText("X");
             btnRemove.setId(btnRemoveID + i);
@@ -89,25 +92,24 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lparams.setMargins(5,10,10,10);
         ll.setLayoutParams(lparams);
-        llayout.addView(ll);
+        llayout.addView(ll); //Add the layout to the main layout in scrollable view
 
     }
 
+    //Function to remove the layout (containing auto complete text view, edit text, and 2 buttons) from the main layout
     void removeIngQty(View view) {
-        int viewID = view.getId();
+        int viewID = view.getId(); //ID of the button that is clicked
         int layout;
-        layout = viewID-4000;
+        layout = viewID-4000; //Layout where the button is located
         llayout.removeView(llayout.findViewById(layout));
-        textView.setText("removing i = " + i + "  id=" + viewID + llayout.findViewById(layout));
     }
 
     public void onClick(View view) {
-        int viewID = view.getId();
+        int viewID = view.getId(); //ID of the button that is clicke
 
         //Button Add has ID from 3001
         if(viewID >= btnAddID && viewID<btnAddID+1000) {
             addIngQty();
-            textView.setText("i = " + i + "  id=" + view.getId());
         }
 
         //Button Remove has ID from 4001
