@@ -11,6 +11,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.firuza.foodiesadda.AddIngridient">
 
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,15 +29,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/linearlayout">
-
-            <Button
-                android:text="+"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/acMasterIngridients"
-                android:layout_toEndOf="@+id/txtQty"
-                android:layout_marginStart="54dp"
-                android:id="@+id/btnAddIng" />
 
         </LinearLayout>
     </ScrollView>

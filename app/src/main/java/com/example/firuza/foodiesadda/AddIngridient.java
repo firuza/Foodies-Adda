@@ -24,65 +24,95 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
 
     DatabaseHandler mydb;
     LinearLayout llayout;
-    Button btnAddIng;
     ArrayAdapter arrayAdapter;
     ScrollView scroll;
-    int btnID;
+    TextView textView;
+    int layoutID=1001;
+    int IngID=2001;
+    int QtyID=3001;
+    int btnAddID=4001;
+    int btnRemoveID=5001;
+    int i=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        btnID=1000;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ingridient);
 
-        llayout = (LinearLayout) findViewById(R.id.linearlayout);
-        scroll = (ScrollView) findViewById(R.id.scroll);
+        textView = (TextView) findViewById(R.id.textView);
 
-        btnAddIng = (Button) findViewById(R.id.btnAddIng);
-        btnAddIng.setOnClickListener(this);
+        llayout = (LinearLayout) findViewById(R.id.linearlayout);
+
+        scroll = (ScrollView) findViewById(R.id.scroll);
 
         mydb = new DatabaseHandler(this);
 
         ArrayList array_list = mydb.getListofRecipes();
         arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, array_list);
-
-    }
-    public void onClick(View view) {
-        switch (view.getId()) {
-
-            case R.id.btnAddIng:
-                addIngQty();
-
-                break;
-
-            default:
-                break;
-        }
-
+        addIngQty();
     }
 
     void addIngQty() {
-//        acMasterIngridients = (AutoCompleteTextView) findViewById(R.id.acMasterIngridients);
-//        txtQty = (TextView) findViewById(R.id.txtQty);
-
         LinearLayout ll=new LinearLayout(this);
         ll.setOrientation(LinearLayout.HORIZONTAL);
+        ll.setId(layoutID+i);
 
         final AutoCompleteTextView acMasterIngridients = new AutoCompleteTextView(this);
+        acMasterIngridients.setId(IngID+i);
         acMasterIngridients.setAdapter(arrayAdapter);
-        acMasterIngridients.setWidth(700);
+        acMasterIngridients.setWidth(400);
+
         ll.addView(acMasterIngridients);
 
         final EditText txtQty = new EditText(this);
-        txtQty.setWidth(500);
+        txtQty.setId(QtyID+i);
+        txtQty.setWidth(300);
         ll.addView(txtQty);
 
+        final Button btnAdd = new Button(this);
+        btnAdd.setText("+");
+        btnAdd.setId(btnAddID+i);
+        btnAdd.setOnClickListener(this);
+        ll.addView(btnAdd);
+
+        if(i!=0) {
+            final Button btnRemove = new Button(this);
+            btnRemove.setText("X");
+            btnRemove.setId(btnRemoveID + i);
+            btnRemove.setOnClickListener(this);
+            ll.addView(btnRemove);
+        }
+
+        i++; //Increment id iterator
+
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lparams.setMargins(70,10,10,10);
+        lparams.setMargins(5,10,10,10);
         ll.setLayoutParams(lparams);
         llayout.addView(ll);
 
     }
 
+    void removeIngQty(View view) {
+        int viewID = view.getId();
+        int layout;
+        layout = viewID-4000;
+        llayout.removeView(llayout.findViewById(layout));
+        textView.setText("removing i = " + i + "  id=" + viewID + llayout.findViewById(layout));
+    }
+
+    public void onClick(View view) {
+        int viewID = view.getId();
+
+        //Button Add has ID from 3001
+        if(viewID >= btnAddID && viewID<btnAddID+1000) {
+            addIngQty();
+            textView.setText("i = " + i + "  id=" + view.getId());
+        }
+
+        //Button Remove has ID from 4001
+        if(viewID >= btnRemoveID && viewID<=btnRemoveID+1000) {
+            removeIngQty(view);
+        }
+    }
 }
