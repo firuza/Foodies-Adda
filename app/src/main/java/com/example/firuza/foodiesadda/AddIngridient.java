@@ -1,5 +1,6 @@
 package com.example.firuza.foodiesadda;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,16 +10,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Spinner;
-import android.widget.TextView;
-
 import java.util.ArrayList;
-
-import static android.R.attr.layout_height;
-import static android.R.attr.layout_width;
+import java.util.Arrays;
 
 public class AddIngridient extends AppCompatActivity implements View.OnClickListener   {
 
@@ -26,18 +20,24 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
     LinearLayout llayout;
     ArrayAdapter arrayAdapter;
     ScrollView scroll;
+    Button btnIncludeIngredients;
     int layoutID=1001;
     int IngID=2001;
     int QtyID=3001;
     int btnAddID=4001;
     int btnRemoveID=5001;
     int i=0;
+    EditText txtQty[] = new EditText[999];
+    AutoCompleteTextView acMasterIngridients[] = new AutoCompleteTextView[999];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ingridient);
+
+        btnIncludeIngredients = (Button) findViewById(R.id.btnIncludeIngredients);
+        btnIncludeIngredients.setOnClickListener(this);
 
         //Scrollable layout on the activity
         scroll = (ScrollView) findViewById(R.id.scroll);
@@ -46,7 +46,8 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         llayout = (LinearLayout) findViewById(R.id.linearlayout);
         mydb = new DatabaseHandler(this);
 
-        ArrayList array_list = mydb.getListofRecipes();
+       // mydb.LoadIngridientsMaster();
+        ArrayList array_list = mydb.getListofIngredients();
         arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, array_list);
         addIngQty();
     }
@@ -59,17 +60,16 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         ll.setId(layoutID+i);
 
         //Create a autocomplete text view and load all ingredients
-        final AutoCompleteTextView acMasterIngridients = new AutoCompleteTextView(this);
-        acMasterIngridients.setId(IngID+i);
-        acMasterIngridients.setAdapter(arrayAdapter);
-        acMasterIngridients.setWidth(400);
-        ll.addView(acMasterIngridients); //Adding to layout
+        acMasterIngridients[i] = new AutoCompleteTextView(this);
+        acMasterIngridients[i].setId(IngID+i);
+        acMasterIngridients[i].setAdapter(arrayAdapter);
+        acMasterIngridients[i].setWidth(400);
+        ll.addView(acMasterIngridients[i]); //Adding to layout
 
-        //Create a quantity edit text
-        final EditText txtQty = new EditText(this);
-        txtQty.setId(QtyID+i);
-        txtQty.setWidth(300);
-        ll.addView(txtQty); //Adding to layout
+        txtQty[i] = new EditText(this);
+        txtQty[i].setId(QtyID+i);
+        txtQty[i].setWidth(300);
+        ll.addView(txtQty[i]); //Adding to layout
 
         //Create a add button to dynamically create items in layout
         final Button btnAdd = new Button(this);
@@ -101,7 +101,10 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         int viewID = view.getId(); //ID of the button that is clicked
         int layout;
         layout = viewID-4000; //Layout where the button is located
+        acMasterIngridients[viewID-5001].setText("XX");
+        txtQty[viewID-5001].setText("XX");
         llayout.removeView(llayout.findViewById(layout));
+
     }
 
     public void onClick(View view) {
@@ -116,5 +119,80 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         if(viewID >= btnRemoveID && viewID<=btnRemoveID+1000) {
             removeIngQty(view);
         }
+
+        if (viewID==R.id.btnIncludeIngredients) {
+            //Extract all ingredients and quantity in 2D string array
+            AlertDialog.Builder alert = new AlertDialog.Builder(AddIngridient.this);
+            String[] strArrayIng, strArrayQty;
+            strArrayIng = new String [100];
+            strArrayQty = new String [100];
+            int itemCount=0, actualCount=0;
+            boolean duplicatePresent=false, recordInDB=true, isEmpty=false;
+
+            //Check values of all items present in the layout
+            while (itemCount < i) {
+                String tempIng="", tempQty="";
+                tempIng = acMasterIngridients[itemCount].getText().toString();
+                tempQty = txtQty[itemCount].getText().toString();
+
+                //Check whether the item was removed or not
+                if(!(tempIng.equalsIgnoreCase("XX"))) {
+
+                    if( tempIng.isEmpty() || tempQty.isEmpty()) {
+                        isEmpty=true;
+                        break;
+                    }
+
+                    //Check whether the list contains duplicate items
+                    if(Arrays.asList(strArrayIng).contains(tempIng)){
+                        duplicatePresent=true;
+                        break;
+                    }
+
+                    //Check whether the ingredients written are present in the table
+                    if(!(mydb.isIngredientPresent(tempIng))) {
+                        recordInDB=false;
+                        break;
+                    }
+
+                    strArrayIng[actualCount] = tempIng;
+                    strArrayQty[actualCount] = tempQty;
+                    actualCount++;
+                }
+                itemCount++;
+            } //End of while
+
+            if(isEmpty) {
+                alert.setTitle("Fields cannot be empty");
+                alert.setMessage("Ingredients and quantity fields cannot be empty");
+                alert.setPositiveButton("OK", null);
+                alert.show();
+            }
+
+            if(duplicatePresent) {
+                alert.setTitle("Contains Duplicates");
+                alert.setMessage("Your list contains duplicate ingredients item. Please remove them");
+                alert.setPositiveButton("OK", null);
+                alert.show();
+            }
+
+            if(!recordInDB) {
+                alert.setTitle("Ingredient not present");
+                alert.setMessage("One of the Ingredients included in your list is not in the master list. Please rectify it.");
+                alert.setPositiveButton("OK", null);
+                alert.show();
+            }
+
+            if (!duplicatePresent && recordInDB && !isEmpty) {
+                alert.setTitle("Successful");
+                alert.setMessage(actualCount + "ingredients included successfully");
+                alert.setPositiveButton("OK", null);
+                alert.show();
+
+            }
+
+        }
+
     }
 }
+

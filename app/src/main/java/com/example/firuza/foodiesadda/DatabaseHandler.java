@@ -37,18 +37,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     public DatabaseHandler(Context context) {
-        super(context, DATABASE_NAME , null, 1);
+        super(context, DATABASE_NAME , null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table if not exists tblRecipe " + "(RID integer primary key, Name text, PrepTime text, Procedure text)" );
+        db.execSQL("create table if not exists tblIngMaster " + "(IID integer primary key, Name text)" );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS tblRecipe");
+        db.execSQL("DROP TABLE IF EXISTS tblIngMaster");
         onCreate(db);
     }
 
@@ -85,7 +87,93 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return res;
     }
 
-    public Cursor getIng(int id) {
+    public boolean isIngredientPresent(String title) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from tblIngMaster where Name='"+title+"'", null );
+
+        if(res.getCount()==0)
+            return false;
+        else
+            return true;
+    }
+
+    public void LoadIngridientsMaster() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("Name", "Salt");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Oil");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Turmeric Powder");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Chilli Powder");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Dhansak Masala");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Dhana Jeera");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Sambhar");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Onion");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Tomatoe");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Potatoe");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Drumsticks");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Beetroot");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Ladyfingers");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Cauliflower");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Green Peas");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Palak");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Coriander Leaves");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Carrot");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Cucumber");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Ginger Garlic Paste");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Rye");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Rice");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Moong Dal");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "King Fish");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Prawns");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Raddish");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Decicated coconut");
+        db.insert("tblIngMaster", null, contentValues);
+    }
+
+    public ArrayList<String> getListofIngredients() {
+        ArrayList<String> array_list = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from tblIngMaster", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            String colname;
+            colname = res.getString(res.getColumnIndex(COLUMN_ING_NAME));
+            array_list.add(colname);
+            res.moveToNext();
+        }
+        return array_list;
+    }
+
+    public Cursor getIng() {
+        int id=2;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from tblIngMaster where IID="+id+"", null );
         return res;
