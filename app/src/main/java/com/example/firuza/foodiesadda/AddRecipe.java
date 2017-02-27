@@ -1,9 +1,12 @@
 package com.example.firuza.foodiesadda;
 
+import android.content.ComponentName;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.EditText;
 
@@ -13,6 +16,8 @@ import android.app.Activity;
 
 import android.app.AlertDialog;
 
+import java.util.ArrayList;
+
 
 public class AddRecipe extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,6 +25,12 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     Button btnAddRecipe, btnClear, btnAddIngridients;
     EditText editTextRTitle, editTextPrepTime, editTextProcedure;
     String insertRTitle, insertPrepTime, insertProcedure;
+    TextView textViewTitle;
+    ListView lstIngQty;
+    String previousActivity = "";
+    Bundle extras;
+    int requestCode=1;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
 
+        lstIngQty = (ListView) findViewById(R.id.lstIngQty);
+
+        textViewTitle = (TextView) findViewById(R.id.textViewTitle);
 
         editTextRTitle = (EditText) findViewById(R.id.editTextRTitle);
         editTextPrepTime = (EditText) findViewById(R.id.editTextPrepTime);
@@ -43,6 +57,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         btnClear = (Button) findViewById(R.id.btnClear);
         btnClear.setOnClickListener(this);
     }
+
 
     public void onClick(View view) {
         AlertDialog.Builder alert = new AlertDialog.Builder(AddRecipe.this);
@@ -67,8 +82,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.btnAddIngridients:
-                Intent intent3 = new Intent(getApplicationContext(), AddIngridient.class);
-                startActivity(intent3);
+                startActivityForResult(new Intent(getApplicationContext(), AddIngridient.class),requestCode);
                 break;
 /*
             case R.id.btnDeleteAll:
@@ -88,8 +102,18 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             default:
                 break;
         }
+    }
 
+    //Data (Ingredient and Quantity) returned by 'Add Ingredients' activity
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if (resultCode == RESULT_OK) {
 
+                ArrayList array_list = data.getStringArrayListExtra("strArrayIng");
+                ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, array_list);
+
+                lstIngQty.setAdapter(arrayAdapter);
+
+            }
     }
 
 }

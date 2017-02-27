@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnAddRecipe:
                 Intent intent1 = new Intent(getApplicationContext(), AddRecipe.class);
+                Bundle extras = new Bundle();
+                extras.putString("prevActivity","Main");
+                intent1.putExtras(extras);
                 startActivity(intent1);
                 break;
 

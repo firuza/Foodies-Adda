@@ -121,11 +121,13 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         }
 
         if (viewID==R.id.btnIncludeIngredients) {
-            //Extract all ingredients and quantity in 2D string array
+            //Extract all ingredients and quantity in string array list
             AlertDialog.Builder alert = new AlertDialog.Builder(AddIngridient.this);
-            String[] strArrayIng, strArrayQty;
-            strArrayIng = new String [100];
-            strArrayQty = new String [100];
+//            String[] strArrayQty;
+//            strArrayQty = new String [100];
+            ArrayList<String> strArrayIng = new ArrayList<String>();
+            ArrayList<String> strArrayQty = new ArrayList<String>();
+
             int itemCount=0, actualCount=0;
             boolean duplicatePresent=false, recordInDB=true, isEmpty=false;
 
@@ -144,7 +146,7 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
                     }
 
                     //Check whether the list contains duplicate items
-                    if(Arrays.asList(strArrayIng).contains(tempIng)){
+                    if(strArrayIng.contains(tempIng)){
                         duplicatePresent=true;
                         break;
                     }
@@ -155,8 +157,8 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
                         break;
                     }
 
-                    strArrayIng[actualCount] = tempIng;
-                    strArrayQty[actualCount] = tempQty;
+                    strArrayIng.add(tempIng);
+                    strArrayQty.add(tempQty);
                     actualCount++;
                 }
                 itemCount++;
@@ -184,15 +186,20 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
             }
 
             if (!duplicatePresent && recordInDB && !isEmpty) {
-                alert.setTitle("Successful");
-                alert.setMessage(actualCount + "ingredients included successfully");
-                alert.setPositiveButton("OK", null);
-                alert.show();
+//                alert.setTitle("Successful");
+//                alert.setMessage(actualCount + "ingredients included successfully");
+//                alert.setPositiveButton("OK", null);
+//                alert.show();
 
+                Intent data = new Intent();
+                data.putStringArrayListExtra("strArrayIng",strArrayIng);
+                data.putStringArrayListExtra("strArrayQty",strArrayQty);
+//                data.putExtra("strArrayQty",strArrayQty);
+                data.putExtra("prevActivity","ADDIng");
+                setResult(RESULT_OK,data);
+                finish();//Going back to add recipe and retaining the values in that activity
             }
-
         }
-
     }
 }
 

@@ -99,4 +99,11 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="31dp" />
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/editTextProcedure"
+        android:layout_alignParentStart="true"
+        android:id="@+id/lstIngQty" />
+
 </RelativeLayout>
