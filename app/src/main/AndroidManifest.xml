@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListOfRecipes" />
-        <activity android:name=".AddRecipe" />
+        <activity android:name=".AddRecipe"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name=".ViewRecipe" />
         <activity android:name=".AddIngridient"></activity>
     </application>

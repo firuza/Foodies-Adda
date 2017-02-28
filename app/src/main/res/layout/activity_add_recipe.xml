@@ -1,109 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_add_recipe"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.firuza.foodiesadda.AddRecipe">
+    android:layout_height="match_parent" >
 
-    <TextView
-        android:text="Recipe Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewTitle"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="22dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_marginStart="10dp"
-        android:id="@+id/editTextRTitle"
-        android:textSize="14sp"
-        android:layout_alignBaseline="@+id/textViewTitle"
-        android:layout_alignBottom="@+id/textViewTitle"
-        android:layout_toEndOf="@+id/textViewTitle" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editTextPrepTime"
-        android:textSize="14sp"
-        android:layout_alignBaseline="@+id/textViewPrepTime"
-        android:layout_alignBottom="@+id/textViewPrepTime"
-        android:layout_toEndOf="@+id/textViewPrepTime"
-        android:layout_marginStart="12dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editTextProcedure"
-        android:layout_below="@+id/textViewRecipe"
-        android:layout_alignStart="@+id/textViewRecipe"
-        android:elevation="1dp" />
-
-    <Button
-        android:text="Clear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/btnAddRecipe"
-        android:layout_alignEnd="@+id/editTextPrepTime"
-        android:layout_marginEnd="17dp"
-        android:id="@+id/btnClear" />
-
-    <Button
-        android:text="Add Recipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="29dp"
-        android:id="@+id/btnAddRecipe"
-        android:layout_marginEnd="26dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/btnClear" />
-
-    <TextView
-        android:text="Enter your recipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewRecipe"
-        android:layout_below="@+id/editTextPrepTime"
-        android:layout_alignStart="@+id/textViewPrepTime"
-        android:layout_marginTop="32dp" />
-
-    <TextView
-        android:text="Preparation time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewPrepTime"
-        android:layout_below="@+id/editTextRTitle"
-        android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginTop="28dp" />
-
-    <Button
-        android:text="Add Ingridients"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnAddIngridients"
-        android:layout_below="@+id/editTextProcedure"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="31dp" />
-
-    <ListView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/editTextProcedure"
-        android:layout_alignParentStart="true"
-        android:id="@+id/lstIngQty" />
+        android:background="@drawable/capcicum"
+        android:alpha="0.5" />
 
-</RelativeLayout>
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/scroll"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/activity_add_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context="com.example.firuza.foodiesadda.AddRecipe">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:textColor="#000000"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:background="#95FFFFFF"
+                android:textSize="16sp"
+                android:ems="10"
+                android:id="@+id/editTextProcedure"
+                android:layout_below="@+id/textViewRecipe"
+                android:layout_alignStart="@+id/textViewRecipe"
+                android:elevation="1dp" />
+
+            <TextView
+                android:text="Enter your recipe"
+                android:layout_width="wrap_content"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingTop="10dp"
+                android:id="@+id/textViewRecipe"
+                android:layout_below="@+id/editTextPrepTime"
+                android:layout_alignStart="@+id/textViewPrepTime" />
+
+            <TextView
+                android:text="Choose Ingredients"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:paddingTop="10dp"
+                android:textColor="#000000"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewIngredients"
+                android:textSize="16sp"
+                android:layout_below="@+id/editTextProcedure"
+                android:layout_alignStart="@+id/textViewPrepTime" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:textColor="#000000"
+                android:background="#95FFFFFF"
+                android:textSize="16sp"
+                android:id="@+id/lstIngQty"
+                android:layout_below="@+id/textViewIngredients"
+                android:layout_alignStart="@+id/editTextProcedure" />
+
+            <TextView
+                android:text="Recipe Title"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewTitle"
+                android:textSize="16sp"
+                android:layout_marginStart="11dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:background="#95FFFFFF"
+                android:ems="10"
+                android:id="@+id/editTextPrepTime"
+                android:textSize="16sp"
+                android:layout_below="@+id/textViewPrepTime"
+                android:layout_alignStart="@+id/editTextProcedure" />
+
+            <TextView
+                android:text="Preparation time"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:id="@+id/textViewPrepTime"
+                android:layout_below="@+id/editTextRTitle"
+                android:paddingTop="10dp"
+                android:layout_alignStart="@+id/textViewTitle" />
+
+            <Button
+                android:text="Add Ingridients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnAddIngridients"
+                android:layout_below="@+id/lstIngQty"
+                android:layout_alignStart="@+id/lstIngQty" />
+
+            <Button
+                android:text="Clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnClear"
+                android:layout_below="@+id/lstIngQty"
+                android:layout_toRightOf="@id/btnAddIngridients"
+                android:layout_centerHorizontal="true"
+                />
+
+            <Button
+                android:text="Add Recipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnAddRecipe"
+                android:layout_below="@+id/lstIngQty"
+                android:layout_toRightOf="@id/btnClear" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editTextRTitle"
+                android:background="#95FFFFFF"
+                android:textSize="16sp"
+                android:layout_below="@+id/textViewTitle"
+                android:layout_alignStart="@+id/textViewTitle" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</FrameLayout>
