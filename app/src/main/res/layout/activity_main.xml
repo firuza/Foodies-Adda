@@ -30,4 +30,21 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/btnAddRecipe" />
 
+    <Button
+        android:text="Restore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/btnRestore" />
+
+    <Button
+        android:text="Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnRestore"
+        android:layout_toStartOf="@+id/btnAddRecipe"
+        android:layout_marginTop="11dp"
+        android:id="@+id/btnDelete" />
+
 </RelativeLayout>
