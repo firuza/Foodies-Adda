@@ -33,17 +33,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PROCEDURE = "Procedure";
     public static final String COLUMN_ING_ID_PK = "IID";
     public static final String COLUMN_ING_NAME = "Name";
+
+    public static final String COLUMN_FRID ="FRID";
+    public static final String COLUMN_FIID ="FIID";
+    public static final String COLUMN_Qty ="Quantity";
+
     //private HashMap hp;
 
 
     public DatabaseHandler(Context context) {
-        super(context, DATABASE_NAME , null, 2);
+        super(context, DATABASE_NAME , null, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table if not exists tblRecipe " + "(RID integer primary key, Name text, PrepTime text, Procedure text)" );
         db.execSQL("create table if not exists tblIngMaster " + "(IID integer primary key, Name text)" );
+        db.execSQL("create table if not exists tblIngNeeded " + "(FRID integer, FIID Integer, Quantity text)" );
+
     }
 
     @Override
@@ -51,6 +58,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS tblRecipe");
         db.execSQL("DROP TABLE IF EXISTS tblIngMaster");
+        db.execSQL("DROP TABLE IF EXISTS tblIngNeeded");
         onCreate(db);
     }
 
@@ -97,7 +105,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return true;
     }
 
-    public void LoadIngridientsMaster() {
+    public void loadIngridientsMaster() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -172,19 +180,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public Cursor getIng() {
-        int id=2;
+    public Cursor getIngID(String title) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from tblIngMaster where IID="+id+"", null );
+        Cursor res =  db.rawQuery( "select * from tblIngMaster where Name='"+title+"'", null );
         return res;
     }
 
-/*    public boolean deleteAll() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("delete from tblRecipe");
+    public boolean insertIngredientsNeeded(int RID, int IID, String Quantity) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("FRID", RID);
+        contentValues.put("FIID", IID);
+        contentValues.put("Quantity", Quantity);
+        db.insert("tblIngNeeded", null, contentValues);
         return true;
     }
 
+
+    public boolean deleteAll() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL("delete from tblRecipe");
+        db.execSQL("delete from tblIngMaster");
+        db.execSQL("delete from tblIngNeeded");
+        return true;
+    }
+/*
     public int getRecordCount() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery("select * from tblRecipe",null);

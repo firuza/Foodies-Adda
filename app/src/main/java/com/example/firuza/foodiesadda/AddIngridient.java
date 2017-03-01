@@ -125,6 +125,7 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
             AlertDialog.Builder alert = new AlertDialog.Builder(AddIngridient.this);
 //            String[] strArrayQty;
 //            strArrayQty = new String [100];
+
             ArrayList<String> strArrayIng = new ArrayList<String>();
             ArrayList<String> strArrayQty = new ArrayList<String>();
 
@@ -194,7 +195,6 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
                 Intent data = new Intent();
                 data.putStringArrayListExtra("strArrayIng",strArrayIng);
                 data.putStringArrayListExtra("strArrayQty",strArrayQty);
-//                data.putExtra("strArrayQty",strArrayQty);
                 data.putExtra("prevActivity","ADDIng");
                 setResult(RESULT_OK,data);
                 finish();//Going back to add recipe and retaining the values in that activity

@@ -1,4 +1,4 @@
-package com.example.firuza.foodiesadda;
+ package com.example.firuza.foodiesadda;
 
 import android.content.ComponentName;
 import android.support.v7.app.AppCompatActivity;
@@ -27,10 +27,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     String insertRTitle, insertPrepTime, insertProcedure;
     TextView textViewTitle;
     ListView lstIngQty;
-    String previousActivity = "";
-    Bundle extras;
     int requestCode=1;
-    ArrayAdapter<String> adapter;
+    ArrayList alIng, alQty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +58,12 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
 
     public void onClick(View view) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(AddRecipe.this);
 
         switch (view.getId()) {
 
             case R.id.btnAddRecipe:
-                insertRTitle = editTextRTitle.getText().toString();
-                insertPrepTime = editTextPrepTime.getText().toString();
-                insertProcedure = editTextProcedure.getText().toString();
-                mydb.insertRecipe(insertRTitle,insertPrepTime,insertProcedure);
-                alert.setTitle("Successful Insertion");
-                alert.setMessage("The recipe has been successfully inserted");
-                alert.setPositiveButton("OK",null);
-                alert.show();
+                String RID = insertRecipe();
+                insertIngredientsQuantity(RID);
                 break;
 
             case R.id.btnClear:
@@ -84,36 +75,60 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             case R.id.btnAddIngridients:
                 startActivityForResult(new Intent(getApplicationContext(), AddIngridient.class),requestCode);
                 break;
-/*
-            case R.id.btnDeleteAll:
-                mydb.deleteAll();
-                alert.setTitle("Successful Delete");
-                alert.setMessage("All records have been successfully deleted");
-                alert.setPositiveButton("OK",null);
-                alert.show();
-                break;
-
-            case R.id.btnRecordCount:
-                int count = mydb.getRecordCount();
-                txtID.setText("Records: " + count);
-                break;
-*/
 
             default:
                 break;
         }
     }
 
+    public String insertRecipe() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(AddRecipe.this);
+        insertRTitle = editTextRTitle.getText().toString();
+        insertPrepTime = editTextPrepTime.getText().toString();
+        insertProcedure = editTextProcedure.getText().toString();
+        mydb.insertRecipe(insertRTitle,insertPrepTime,insertProcedure);
+
+        Cursor rs = mydb.getData(insertRTitle);
+        rs.moveToFirst();
+        String RID = rs.getString(rs.getColumnIndex(DatabaseHandler.COLUMN_ID));
+        return RID;
+    }
+
+    public void insertIngredientsQuantity(String rID){
+        AlertDialog.Builder alert = new AlertDialog.Builder(AddRecipe.this);
+
+        //Iterate through all ingredients one by one
+        for (int i=0; i<alIng.size(); i++) {
+            //Get the Ingredient ID from the master ingredient list
+            Cursor rs = mydb.getIngID(alIng.get(i).toString());
+            rs.moveToFirst();
+            int IID = Integer.parseInt(rs.getString(rs.getColumnIndex(DatabaseHandler.COLUMN_ING_ID_PK)));
+
+            int RID = Integer.parseInt(rID); //Recipe ID
+
+            //Insert RID, IID, and the quantity in 'Ingredients needed' table
+            mydb.insertIngredientsNeeded(RID,IID,alQty.get(i).toString());
+        }
+        alert.setTitle("Successful Insertion");
+        alert.setMessage("Recipe inserted successfully");
+        alert.setPositiveButton("OK",null);
+        alert.show();
+    }
+
     //Data (Ingredient and Quantity) returned by 'Add Ingredients' activity
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
             if (resultCode == RESULT_OK) {
 
-                ArrayList array_list = data.getStringArrayListExtra("strArrayIng");
-                ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, array_list);
+                alIng = data.getStringArrayListExtra("strArrayIng");
+                alQty = data.getStringArrayListExtra("strArrayQty");
+		
+    	        ArrayList<String> IngQty = new ArrayList<String>();
+		        for (int i=0; i<alIng.size(); i++) {
+        			IngQty.add(alIng.get(i) + ", " + alQty.get(i));
+		        }
 
+                ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, IngQty);
                 lstIngQty.setAdapter(arrayAdapter);
-
             }
     }
-
 }
