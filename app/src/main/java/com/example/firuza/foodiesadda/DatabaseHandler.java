@@ -204,6 +204,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("delete from tblIngNeeded");
         return true;
     }
+
+    public ArrayList<String> getIngsAndQtysOfRecipe(int RID) {
+        ArrayList<String> array_list = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //This will return quantify from tblIngNeeded and the ingredient from tblIngMaster table based on the IDs given in tblIngNeeded table of the specific RID
+        //Format will be IngName, Quantity
+        Cursor res =  db.rawQuery( "select tblIngMaster.Name, tblIngNeeded.Quantity from tblIngNeeded join tblIngMaster on tblIngNeeded.FIID = tblIngMaster.IID where tblIngNeeded.FRID='"+RID+"'", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            array_list.add(res.getString(0) + ", " + res.getString(1) );
+            res.moveToNext();
+        }
+        return array_list;
+    }
+
+
+
 /*
     public int getRecordCount() {
         SQLiteDatabase db = this.getReadableDatabase();

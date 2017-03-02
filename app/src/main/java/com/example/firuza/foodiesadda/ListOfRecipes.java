@@ -38,18 +38,20 @@ public class ListOfRecipes extends AppCompatActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
 
-                String valueProcedure, valueTitle, valueTime;
+                String valueRID, valueProcedure, valueTitle, valueTime;
                 String title=((TextView) view).getText().toString();
 
                 Cursor rs = mydb.getData(title);
                 rs.moveToFirst();
 
+                valueRID = rs.getString(rs.getColumnIndex(DatabaseHandler.COLUMN_ID));
                 valueTitle = rs.getString(rs.getColumnIndex(DatabaseHandler.COLUMN_NAME));
                 valueTime = rs.getString(rs.getColumnIndex(DatabaseHandler.COLUMN_TIME));
                 valueProcedure = rs.getString(rs.getColumnIndex(DatabaseHandler.COLUMN_PROCEDURE));
 
                 Intent intent1 = new Intent(getApplicationContext(), ViewRecipe.class);
                 Bundle extras = new Bundle();
+                extras.putString("rID",valueRID.toString());
                 extras.putString("RTitle", valueTitle.toString());
                 extras.putString("RTime", valueTime.toString());
                 extras.putString("RProcedure", valueProcedure.toString());
