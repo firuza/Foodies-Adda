@@ -3,6 +3,7 @@
 import android.content.ComponentName;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.database.Cursor;
 import android.app.Activity;
 
 import android.app.AlertDialog;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -62,8 +64,32 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         switch (view.getId()) {
 
             case R.id.btnAddRecipe:
-                String RID = insertRecipe();
-                insertIngredientsQuantity(RID);
+                boolean validationPassed=true;
+                insertRTitle = editTextRTitle.getText().toString().trim();
+                insertPrepTime = editTextPrepTime.getText().toString().trim();
+                insertProcedure = editTextProcedure.getText().toString().trim();
+
+                if(TextUtils.isEmpty(insertRTitle)) {
+                    editTextRTitle.setError("Title cannot be blank");
+                    validationPassed=false;
+                }
+                if(TextUtils.isEmpty(insertPrepTime)) {
+                    editTextPrepTime.setError("Preparation time cannot be blank");
+                    validationPassed=false;
+                }
+                if(TextUtils.isEmpty(insertProcedure)) {
+                    editTextProcedure.setError("Procedure cannot be blank");
+                    validationPassed=false;
+                }
+                if(lstIngQty.getCount()==0){
+                    Toast.makeText( getApplicationContext(), "Ingredient(s) needed", Toast.LENGTH_SHORT).show();
+                    validationPassed=false;
+                }
+
+                if(validationPassed==true) {
+                    String RID = insertRecipe();
+                    insertIngredientsQuantity(RID);
+                }
                 break;
 
             case R.id.btnClear:
