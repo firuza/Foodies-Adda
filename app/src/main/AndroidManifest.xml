@@ -19,7 +19,8 @@
         <activity android:name=".AddRecipe"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name=".ViewRecipe" />
-        <activity android:name=".AddIngridient"></activity>
+        <activity android:name=".AddIngridient"
+            android:windowSoftInputMode="stateVisible|adjustPan" ></activity>
     </application>
 
 </manifest>

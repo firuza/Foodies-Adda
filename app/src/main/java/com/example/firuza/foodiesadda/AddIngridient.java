@@ -2,6 +2,7 @@ package com.example.firuza.foodiesadda;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -64,11 +65,21 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         acMasterIngridients[i].setId(IngID+i);
         acMasterIngridients[i].setAdapter(arrayAdapter);
         acMasterIngridients[i].setWidth(400);
+        acMasterIngridients[i].setBackgroundColor(Color.parseColor("#85FFFFFF"));
+        acMasterIngridients[i].setText("Ingredient");
+        acMasterIngridients[i].setPadding(20,17,10,20);
+        acMasterIngridients[i].setSelectAllOnFocus(true);
+
         ll.addView(acMasterIngridients[i]); //Adding to layout
 
         txtQty[i] = new EditText(this);
         txtQty[i].setId(QtyID+i);
         txtQty[i].setWidth(300);
+        txtQty[i].setText("Qty");
+        txtQty[i].setBackgroundColor(Color.parseColor("#85FFFFFF"));
+        txtQty[i].setPadding(20,17,10,20);
+        txtQty[i].setSelectAllOnFocus(true);
+
         ll.addView(txtQty[i]); //Adding to layout
 
         //Create a add button to dynamically create items in layout
