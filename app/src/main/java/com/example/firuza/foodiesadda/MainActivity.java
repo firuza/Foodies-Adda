@@ -15,7 +15,7 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
     DatabaseHandler mydb;
-    Button btnAddRecipe, btnViewRecipes, btnRestore, btnDelete;
+    Button btnAddRecipe, btnViewRecipes, btnRestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnRestore = (Button)findViewById(R.id.btnRestore);
         btnRestore.setOnClickListener(this);
-
-        btnDelete = (Button)findViewById(R.id.btnDelete);
-        btnDelete.setOnClickListener(this);
     }
     public void onClick(View view)
     {
-        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-
         switch (view.getId()) {
 
             case R.id.btnAddRecipe:
@@ -56,17 +51,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnRestore:
-                mydb.loadIngridientsMaster();
-                break;
-
-            case R.id.btnDelete:
                 mydb.deleteAll();
+                mydb.loadIngridientsMaster();
                 break;
 
             default:
                 break;
         }
     }
-
-
 }

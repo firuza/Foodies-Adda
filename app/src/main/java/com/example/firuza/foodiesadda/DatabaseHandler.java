@@ -163,6 +163,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Decicated coconut");
         db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Green Chilly");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Poha");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Sugar");
+        db.insert("tblIngMaster", null, contentValues);
     }
 
     public ArrayList<String> getListofIngredients() {
