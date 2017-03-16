@@ -115,7 +115,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Turmeric Powder");
         db.insert("tblIngMaster", null, contentValues);
-        contentValues.put("Name", "Chilli Powder");
+        contentValues.put("Name", "Chilly Powder");
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Dhansak Masala");
         db.insert("tblIngMaster", null, contentValues);
@@ -125,9 +125,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Onion");
         db.insert("tblIngMaster", null, contentValues);
-        contentValues.put("Name", "Tomatoe");
+        contentValues.put("Name", "Tomato");
         db.insert("tblIngMaster", null, contentValues);
-        contentValues.put("Name", "Potatoe");
+        contentValues.put("Name", "Potato");
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Drumsticks");
         db.insert("tblIngMaster", null, contentValues);
@@ -139,7 +139,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Green Peas");
         db.insert("tblIngMaster", null, contentValues);
-        contentValues.put("Name", "Palak");
+        contentValues.put("Name", "Spinach");
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Coriander Leaves");
         db.insert("tblIngMaster", null, contentValues);
@@ -159,7 +159,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Prawns");
         db.insert("tblIngMaster", null, contentValues);
-        contentValues.put("Name", "Raddish");
+        contentValues.put("Name", "Radish");
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Decicated coconut");
         db.insert("tblIngMaster", null, contentValues);
@@ -168,6 +168,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put("Name", "Poha");
         db.insert("tblIngMaster", null, contentValues);
         contentValues.put("Name", "Sugar");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Chicken");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Mutton");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Egg");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Rava");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Capsicum");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Pepper whole");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Clove");
+        db.insert("tblIngMaster", null, contentValues);
+        contentValues.put("Name", "Cinnamon Sticks");
         db.insert("tblIngMaster", null, contentValues);
     }
 
