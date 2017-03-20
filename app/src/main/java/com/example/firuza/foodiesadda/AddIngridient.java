@@ -86,6 +86,8 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         final Button btnAdd = new Button(this);
         btnAdd.setText("+");
         btnAdd.setId(btnAddID+i);
+        btnAdd.setMinimumWidth(0);
+        btnAdd.setWidth(150);
         btnAdd.setOnClickListener(this);
         ll.addView(btnAdd);
 
@@ -94,6 +96,8 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
             final Button btnRemove = new Button(this);
             btnRemove.setText("X");
             btnRemove.setId(btnRemoveID + i);
+            btnRemove.setMinimumWidth(0);
+            btnRemove.setWidth(150);
             btnRemove.setOnClickListener(this);
             ll.addView(btnRemove);
         }
