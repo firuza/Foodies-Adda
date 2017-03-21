@@ -38,7 +38,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_FIID ="FIID";
     public static final String COLUMN_Qty ="Quantity";
 
-    //private HashMap hp;
 
 
     public DatabaseHandler(Context context) {
