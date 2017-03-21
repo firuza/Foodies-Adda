@@ -68,12 +68,14 @@
                 android:layout_below="@+id/editTextProcedure"
                 android:layout_alignStart="@+id/textViewPrepTime" />
 
+
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:textColor="#000000"
                 android:background="#95FFFFFF"
                 android:textSize="16sp"
+                android:scrollbars="vertical"
                 android:id="@+id/lstIngQty"
                 android:layout_below="@+id/textViewIngredients"
                 android:layout_alignStart="@+id/editTextProcedure" />
