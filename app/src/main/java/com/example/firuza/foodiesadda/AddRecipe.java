@@ -30,7 +30,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     TextView textViewTitle;
     ListView lstIngQty;
     int requestCode=1;
-    ArrayList alIng, alQty;
+    ArrayList<String> alIng, alQty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,10 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         btnAddIngridients = (Button) findViewById(R.id.btnAddIngridients);
         btnAddIngridients.setOnClickListener(this);
+        alIng = new ArrayList<String>();
+        alQty = new ArrayList<String>();
+        alIng.add("Ingredients");
+        alQty.add("Qty");
 
         btnClear = (Button) findViewById(R.id.btnClear);
         btnClear.setOnClickListener(this);
@@ -99,7 +103,16 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.btnAddIngridients:
-                startActivityForResult(new Intent(getApplicationContext(), AddIngridient.class),requestCode);
+
+                Intent data = new Intent(getApplicationContext(), AddIngridient.class);
+
+                //Load the ingredients which were already selected by the user and wants to add/remove/edit it
+                Bundle extras = new Bundle();
+                extras.putStringArrayList("initialIng",alIng);
+                extras.putStringArrayList("initialQty",alQty);
+
+                data.putExtras(extras);
+                startActivityForResult(data,requestCode);
                 break;
 
             default:

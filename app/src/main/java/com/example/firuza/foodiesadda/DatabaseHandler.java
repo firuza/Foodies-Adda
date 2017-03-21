@@ -39,7 +39,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_Qty ="Quantity";
 
 
-
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME , null, 3);
     }

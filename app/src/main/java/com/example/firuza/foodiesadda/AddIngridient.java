@@ -30,6 +30,7 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
     int i=0;
     EditText txtQty[] = new EditText[999];
     AutoCompleteTextView acMasterIngridients[] = new AutoCompleteTextView[999];
+    ArrayList<String> alIng, alQty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +48,23 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         llayout = (LinearLayout) findViewById(R.id.linearlayout);
         mydb = new DatabaseHandler(this);
 
-       // mydb.LoadIngridientsMaster();
+
         ArrayList array_list = mydb.getListofIngredients();
         arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, array_list);
-        addIngQty();
+
+        Bundle extras = getIntent().getExtras();
+
+        alIng = extras.getStringArrayList("initialIng");
+        alQty = extras.getStringArrayList("initialQty");
+
+        //Load the ingredients which are already selected by the user
+        for (int i = 0; i < alIng.size(); i++) {
+            addIngQty(alIng.get(i),alQty.get(i));
+        }
     }
 
     //Function to add auto complte text, edit text, and 2 buttons to the layout
-    void addIngQty() {
+    void addIngQty(String ingredient, String quantity) {
         //Create a linear layout ll to comprise of ingredients edittext, quantity edittext, add button, and remove button
         LinearLayout ll=new LinearLayout(this);
         ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -66,7 +76,7 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         acMasterIngridients[i].setAdapter(arrayAdapter);
         acMasterIngridients[i].setWidth(400);
         acMasterIngridients[i].setBackgroundColor(Color.parseColor("#85FFFFFF"));
-        acMasterIngridients[i].setText("Ingredient");
+        acMasterIngridients[i].setText(ingredient);
         acMasterIngridients[i].setPadding(20,17,10,20);
         acMasterIngridients[i].setSelectAllOnFocus(true);
 
@@ -75,7 +85,7 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
         txtQty[i] = new EditText(this);
         txtQty[i].setId(QtyID+i);
         txtQty[i].setWidth(300);
-        txtQty[i].setText("Qty");
+        txtQty[i].setText(quantity);
         txtQty[i].setBackgroundColor(Color.parseColor("#85FFFFFF"));
         txtQty[i].setPadding(20,17,10,20);
         txtQty[i].setSelectAllOnFocus(true);
@@ -127,7 +137,7 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
 
         //Button Add has ID from 3001
         if(viewID >= btnAddID && viewID<btnAddID+1000) {
-            addIngQty();
+            addIngQty("Ingredient","Qty");
         }
 
         //Button Remove has ID from 4001
