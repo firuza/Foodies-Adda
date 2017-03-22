@@ -191,7 +191,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert("tblIngMaster", null, contentValues);
     }
 
-    public ArrayList<String> getListofIngredients() {
+    public void addIngridientsInMaster(String title) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("Name", title);
+        db.insert("tblIngMaster", null, contentValues);
+    }
+
+        public ArrayList<String> getListofIngredients() {
         ArrayList<String> array_list = new ArrayList<String>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from tblIngMaster", null );

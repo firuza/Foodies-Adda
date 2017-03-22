@@ -1,6 +1,7 @@
 package com.example.firuza.foodiesadda;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,7 +33,7 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
     int i=0;
     EditText txtQty[] = new EditText[999];
     AutoCompleteTextView acMasterIngridients[] = new AutoCompleteTextView[999];
-    ArrayList<String> alIng, alQty;
+    ArrayList<String> alIng, alQty, ingredientsNotInMasterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +135,22 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
 
     }
 
+    DialogInterface.OnClickListener dialogYesNo = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int YesOrNo) {
+            switch (YesOrNo){
+                case DialogInterface.BUTTON_POSITIVE:
+                    for(int i=0;i<ingredientsNotInMasterList.size();i++) {
+                        mydb.addIngridientsInMaster(ingredientsNotInMasterList.get(i));
+                    }
+                    Toast.makeText( getApplicationContext(), "Items added in the master list. \nNow click Include Ingredients button", Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+    };
+
     public void onClick(View view) {
+        ingredientsNotInMasterList = new ArrayList<String>();
         int viewID = view.getId(); //ID of the button that is clicke
 
         //Button Add has ID from 3001
@@ -180,7 +198,8 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
                     //Check whether the ingredients written are present in the table
                     if(!(mydb.isIngredientPresent(tempIng))) {
                         recordInDB=false;
-                        break;
+                        ingredientsNotInMasterList.add(tempIng);
+                        //break;
                     }
 
                     strArrayIng.add(tempIng);
@@ -205,9 +224,15 @@ public class AddIngridient extends AppCompatActivity implements View.OnClickList
             }
 
             if(!recordInDB) {
+                String ingList="The following item(s) is/are not present in the master list.\n";
+                for(int i=0;i<ingredientsNotInMasterList.size();i++) {
+                    ingList = ingList.concat("\n" + ingredientsNotInMasterList.get(i));
+                }
+
                 alert.setTitle("Ingredient not present");
-                alert.setMessage("One of the Ingredients included in your list is not in the master list. Please rectify it.");
-                alert.setPositiveButton("OK", null);
+                alert.setMessage(ingList + "\nDo you want to include them in the master list. \nClick Yes to include all items, else click No");
+                alert.setPositiveButton("Yes", dialogYesNo);
+                alert.setNegativeButton("No",null);
                 alert.show();
             }
 
