@@ -63,8 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText( getApplicationContext(), "FAQs clicked", Toast.LENGTH_LONG).show();
             return true;
         }
+
         if (id == R.id.action_About) {
             Toast.makeText( getApplicationContext(), "About us clicked", Toast.LENGTH_LONG).show();
+            Intent intentAbout = new Intent(getApplicationContext(), AboutUs.class);
+            startActivity(intentAbout);
             return true;
         }
 

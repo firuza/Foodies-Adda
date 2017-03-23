@@ -1,0 +1,70 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/aboutusback"
+    tools:context="com.example.firuza.foodiesadda.AboutUs">
+
+    <LinearLayout
+        android:id="@+id/fullscreen_content_controls"
+        style="?metaButtonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_overlay"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="20dp"
+            app:srcCompat="@drawable/aboutus1"
+            android:id="@+id/imageView"
+            android:layout_marginTop="10dp"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                app:srcCompat="@drawable/ic_launcher"
+                android:id="@+id/appicon"
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Foodies Adda \n by \n Firuza Aibara"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="We, at Foodies Adda, aim to help every cook, (be it a novice one who is learning to cook or a professional chef) to note down their recipes, and refer it as and when they need to. \n\nWe also provide our yummylicious, Parsi cuisine recipes, for everyone to try it out. \n\nMore features to be released soon."
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/imageView"
+        android:textSize="20sp" />
+
+
+</FrameLayout>

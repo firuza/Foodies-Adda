@@ -8,7 +8,8 @@
         android:label="Foodies Adda !"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,11 +18,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListOfRecipes" />
-        <activity android:name=".AddRecipe"
+        <activity
+            android:name=".AddRecipe"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name=".ViewRecipe" />
-        <activity android:name=".AddIngridient"
-            android:windowSoftInputMode="stateVisible|adjustPan" ></activity>
+        <activity
+            android:name=".AddIngridient"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".AboutUs"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>
