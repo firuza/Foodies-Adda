@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.firuza.foodiesadda.MainActivity">
+    <item
+        android:id="@+id/action_FAQs"
+        android:orderInCategory="100"
+        android:title="@string/action_FAQs"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_About"
+        android:orderInCategory="100"
+        android:title="@string/action_About"
+        app:showAsAction="never" />
+</menu>

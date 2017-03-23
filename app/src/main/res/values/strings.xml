@@ -2,4 +2,9 @@
     <string name="app_name">Foodies Adda</string>
     <string name="title_activity_add_ingridients">AddIngridients</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_FAQs">FAQs</string>
+    <string name="action_About">About us</string>
 </resources>
+
+
+
