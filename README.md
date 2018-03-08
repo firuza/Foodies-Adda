@@ -1,4 +1,6 @@
 # Foodies-Adda
+[![](https://img.shields.io/github/last-commit/google/skia.svg)]
+
 Foodies Adda, an android app, is in its very early stages of development. The features of the current version are given below:
 - Allows the user to add recipes
 - Displays default recipes and the ones added by the user 
