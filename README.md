@@ -1,5 +1,6 @@
 # Foodies-Adda
 [![](https://img.shields.io/github/last-commit/google/skia.svg)](https://github.com/firuza/Foodies-Adda/commits/master)
+[![](https://img.shields.io/github/contributors/firuza/Foodies-Adda.svg)](https://github.com/pinax/pinax-notifications/graphs/contributors)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![](https://img.shields.io/github/issues/firuza/Foodies-Adda.svg)](https://github.com/firuza/Foodies-Adda/issues)
 [![](https://img.shields.io/github/issues-pr/firuza/Foodies-Adda.svg)](https://github.com/firuza/Foodies-Adda/pulls)
