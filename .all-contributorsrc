@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "firuza",
+      "name": "Firuza Aibara",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7722581?v=4",
+      "profile": "https://firuza.github.io/",
+      "contributions": [
+        "design",
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Foodies-Adda",
+  "projectOwner": "firuza",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
